@@ -4,6 +4,7 @@ const HttpError = require("./models/http-error");
 
 const routerPlaces = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -25,4 +26,14 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
-app.listen(5000);
+mongoose
+  .connect(
+    "mongodb+srv://dragan:Pass4Emakina@cluster0.riugc.mongodb.net/places?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => {
+    app.listen(5000);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
