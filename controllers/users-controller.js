@@ -1,16 +1,7 @@
 const HttpError = require("../models/http-error");
-const uuid = require("uuid");
 const { validationResult } = require("express-validator");
 const User = require("../models/user");
 
-const DUMMY_USERS = [
-  {
-    id: "u1",
-    name: "Dragan Milovac",
-    email: "test@test.gmail",
-    password: "test",
-  },
-];
 const getUsers = async (req, res, next) => {
   let users;
   try {
@@ -28,7 +19,7 @@ const signup = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return next(new HttpError("Some of input data are not valid", 422));
   }
-  const { name, email, password, places } = req.body;
+  const { name, email, password } = req.body;
 
   let existingUser;
   try {
@@ -52,7 +43,7 @@ const signup = async (req, res, next) => {
     image:
       "https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png",
     password,
-    places,
+    places: [],
   });
 
   try {
