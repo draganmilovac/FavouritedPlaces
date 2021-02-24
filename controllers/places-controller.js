@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const Place = require("../models/place");
 const User = require("../models/user");
 const mongoose = require("mongoose");
+const fs = require("fs");
 
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid;
@@ -56,8 +57,7 @@ const createPlace = async (req, res, next) => {
     description,
     address,
     location: coordinates,
-    image:
-      "https://static.wikia.nocookie.net/superheroes/images/f/f9/Superhero.jpg/revision/latest/scale-to-width-down/340?cb=20160706065203.jpg",
+    image: req.file.path,
     creator,
   });
 
@@ -135,6 +135,7 @@ const deletePlaceById = async (req, res, next) => {
     return next(error);
   }
 
+  const imagePath = place.image;
   try {
     const sess = await mongoose.startSession();
     sess.startTransaction();
@@ -147,6 +148,8 @@ const deletePlaceById = async (req, res, next) => {
       new HttpError("Something went wrong, could not delete place", 500)
     );
   }
+
+  fs.unlink(imagePath, (err) => {});
   res.status(200).json({ message: "Deleted place." });
 };
 
