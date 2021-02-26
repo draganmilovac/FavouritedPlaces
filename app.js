@@ -46,7 +46,7 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    "mongodb+srv://dragan:Pass4Emakina@cluster0.riugc.mongodb.net/mern?retryWrites=true&w=majority",
+    "mongodb+srv://dragan:VntqgLgc0FT8xwnK@cluster0.riugc.mongodb.net/mern?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
