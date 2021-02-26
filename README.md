@@ -7,3 +7,6 @@ After that just run: npm start
 #Frontend - 
 Inside react-frontend-01-starting-setup folder run: npm install react-scripts --save
 After that just run inside react-frontend-01-starting-setup folder: npm start
+
+#Backend env variables -
+evn variables for backend exist in nodemon.json file in root folder
